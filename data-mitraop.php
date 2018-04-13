@@ -47,21 +47,23 @@ if(isset($_POST['simpan'])){
 </script>
 
 <div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+            <li class="active">Data Kegiatan</li>
+        </ol>
+    </div>
     <div class="page-title">
-        <h3>Input Data Mitra</h3>
-        <div class="page-breadcrumb">
-            <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="data-mitra.php" class="active">Data Mitra</a></li>
-            </ol>
+        <div class="container">
+            <h3>Data Kegiatan</h3>
         </div>
     </div>
-    <div id="main-wrapper">
+    <div id="main-wrapper" class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Input Data Kerjasama Dalam Negeri </h4>
+                        <h4 class="panel-title">Data Kegiatan</h4>
                     </div>
                     <div class="panel-body">
       <br>

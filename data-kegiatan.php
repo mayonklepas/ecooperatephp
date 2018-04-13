@@ -114,28 +114,29 @@ $jumlahpage=ceil($jumlahdata / $limit);
 </script>
 
 <div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+            <li class="active">Data Kegiatan</li>
+        </ol>
+    </div>
     <div class="page-title">
-        <h3>Dasboard</h3>
-        <div class="page-breadcrumb">
-            <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
-                <li class="active">Dasboard</li>
-            </ol>
+        <div class="container">
+            <h3>Data Kegiatan</h3>
         </div>
     </div>
-    <div id="main-wrapper">
+    <div id="main-wrapper" class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data </h4>
+                        <h4 class="panel-title">Data Kegiatan</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive">
-                          <form class="" action="" method="POST">
-                            <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
-                          </form>
-      <a href="data-kegiatanop.php" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+                      <form class="" action="" method="POST">
+                        <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
+                      </form>
+      <a href="data-kegiatanop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
@@ -171,12 +172,12 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 </td>
                 <td><?php echo $value['status_akhir'] ?></td>
                 <td>
-                  <a href="data-kegiatanop.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
+                  <a href="data-kegiatanop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                   <?php if ($value['status']==1): ?>
-                    <a href="data-status-kegiatan.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-info">Cek Status</a>
+                    <a href="data-status-kegiatan.php?id=<?php echo $value['id'] ?>" class="btn btn-info">Cek Status</a>
                   <?php else: ?>
-                    <button type="button" name="aprove" class="btn btn-outline-default aprove" data-id="<?php echo $value['id'] ?>" data-field="status">Pending</button>
+                    <button type="button" name="aprove" class="btn btn-default aprove" data-id="<?php echo $value['id'] ?>" data-field="status">Pending</button>
                   <?php endif; ?>
 
                 </td>
