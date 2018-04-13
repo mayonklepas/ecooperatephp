@@ -96,6 +96,7 @@ $( document ).ready(function() {
     };
     
     flot2();
+    
     var flot1 = function () {
         var data = [[0, 65], [1, 59], [2, 80], [3, 81], [4, 56], [5, 55], [6, 40]];
         var data2 = [[0, 28], [1, 48], [2, 40], [3, 19], [4, 86], [5, 27], [6, 90]];
@@ -190,6 +191,7 @@ $( document ).ready(function() {
     };
     
     flot1();
+    
     
     $(".live-tile").liveTile();
     
