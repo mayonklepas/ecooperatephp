@@ -50,12 +50,13 @@ if(isset($_POST['simpan'])){
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li><a href="data-mitra.php">Data Mitra</a></li>
+            <li class="active">Data Mitra</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Data Mitra</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -72,7 +73,7 @@ if(isset($_POST['simpan'])){
           <input type="text" name="nama" value="<?php echo $snama;?>" class="form-control" required=required autocomplete="off">
           <label for="">Keterangan</label>
           <input type="text" name="keterangan" value="<?php echo $sketerangan;?>" class="form-control" autocomplete="off">
-          <button type="submit" name="simpan" id="simpan" class="btn btn-outline-primary" style="margin-top:10px;" >Simpan</button>
+          <button type="submit" name="simpan" id="simpan" class="btn btn-primary" style="margin-top:10px;" >Simpan</button>
         </form>
       </div>
     </div>

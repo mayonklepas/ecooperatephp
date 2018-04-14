@@ -91,11 +91,12 @@ if(isset($_POST['simpan'])){
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
           <li><a href="data-status-kegiatan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
+          <li class="active"> Upload File Kegiatan</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Upload File Kegiatan</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -103,7 +104,7 @@ if(isset($_POST['simpan'])){
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Upload File Kegiatan</h4>
                     </div>
                     <div class="panel-body">
                       <?php echo $notif ?>

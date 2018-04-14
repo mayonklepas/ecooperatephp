@@ -158,17 +158,16 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 <td><?php echo $value['durasi'] ?></td>
                 <td><?php echo $value['negara'] ?></td>
                 <td><?php echo $value['kota'] ?></td>
-                <td>  <div class="btn-group" role="group">
-                  <button id="btgdokumen" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dokumen
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="btgdokumen">
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=undangan" class="dropdown-item">Undangan</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=deputi" class="dropdown-item">Deputi</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=persetujuan" class="dropdown-item">Persetujuan</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=foto" class="dropdown-item">Foto</a>
-                  </div>
-                </div>
+                <td>
+                  <li class="dropdown" style="list-style-type: none;">
+                    <button type="button" name="button" class=" btn dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">Dokumen</button>
+                      <ul class="dropdown-menu dropdown-list" role="menu">
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=undangan" class="dropdown-item">Undangan</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=deputi" class="dropdown-item">Deputi</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=persetujuan" class="dropdown-item">Persetujuan</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=foto" class="dropdown-item">Foto</a></li>
+                      </ul>
+                  </li>
                 </td>
                 <td><?php echo $value['status_akhir'] ?></td>
                 <td>

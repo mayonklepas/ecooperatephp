@@ -39,12 +39,27 @@ if(isset($_POST['simpan'])){
 
 }
 ?>
-<div class="container-fluid" style="margin-top:20px;margin-bottom:20px;">
-<div class="row justify-content-center">
-<div class="col-lg-8">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-tittle">Input Data Kegiatan</h5>
+<div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="data-kegiatan.php">Data Kegiatan</a></li>
+            <li class="active">Input Data Kegiatan</li>
+        </ol>
+    </div>
+    <div class="page-title">
+        <div class="container">
+            <h3>Input Data Kegiatan</h3>
+        </div>
+    </div>
+    <div id="main-wrapper" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-heading clearfix">
+                        <h4 class="panel-title">Input Data Kegiatan</h4>
+                    </div>
+                    <div class="panel-body">
       <br>
         <form class="" action="" method="post">
           <label for="">NIK</label>
@@ -62,7 +77,7 @@ if(isset($_POST['simpan'])){
           <input type="text" name="negara" value="<?php echo $snegara;?>" class="form-control" autocomplete="off">
           <label for="">Kota</label>
           <input type="text" name="kota" value="<?php echo $skota;?>" class="form-control">
-          <button type="submit" name="simpan" class="btn btn-outline-primary" style="margin-top:10px;">Simpan</button>
+          <button type="submit" name="simpan" class="btn btn-primary" style="margin-top:10px;">Simpan</button>
         </form>
       </div>
     </div>

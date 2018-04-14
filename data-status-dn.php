@@ -34,12 +34,13 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li><a href="data-kerjasama-dalam-negeri.php">Data Kerjasama Dalam Negeri</a></li>
+            <li class="active">Data Status Dalam Negeri</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Data Status Dalam Negeri</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -47,13 +48,13 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Data Status Dalam Negeri</h4>
                     </div>
                     <div class="panel-body">
                           <form class="" action="" method="POST">
                             <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
                           </form>
-      <a href="data-status-dnop.php?id_kerjasama=<?php echo $id ?>" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+      <a href="data-status-dnop.php?id_kerjasama=<?php echo $id ?>" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
               <th>Tanggal</th>
@@ -67,8 +68,8 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
                 <td><?php echo $value['nama'] ?></td>
                   <td><?php echo $value['keterangan'] ?></td>
                 <td>
-                  <a href="data-status-dnop.php?id=<?php echo $value['id'] ?>&id_kerjasama=<?php echo $id ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
+                  <a href="data-status-dnop.php?id=<?php echo $value['id'] ?>&id_kerjasama=<?php echo $id ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                 </td>
               </tr>
               <?php endforeach; ?>

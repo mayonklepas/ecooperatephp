@@ -85,13 +85,27 @@ if(isset($_POST['simpan'])){
   });
 </script>
 
-
-<div class="content">
-    <div class="container-fluid" style="margin-top:20px;margin-bottom:20px;">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
+<div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+          <li><a href="data-status-kegiatan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
+          <li class="active"> Upload File Kegiatan</li>
+        </ol>
+    </div>
+    <div class="page-title">
+        <div class="container">
+            <h3>Upload File Kegiatan</h3>
+        </div>
+    </div>
+    <div id="main-wrapper" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-heading clearfix">
+                        <h4 class="panel-title">Upload File Kegiatan</h4>
+                    </div>
+                    <div class="panel-body">
                         <h4 class="title"><a href="index.php?">DATA KEGIATAN </a> / INPUT <?php echo $headerkat ?></h4>
                       <?php echo $notif ?>
                       <div class="alert alert-warning">

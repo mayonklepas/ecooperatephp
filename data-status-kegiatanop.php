@@ -56,13 +56,14 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
 <div class="page-inner">
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
-            <li><a href="index.php">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li><a href="data-status-kegiatan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
+          <li class="active">Input Data Status Kegiatan</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Input Data Status Kegiatan</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -70,7 +71,7 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Input Data Status Kegiatan</h4>
                     </div>
                     <div class="panel-body">
       <br>
@@ -84,7 +85,7 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
               <option value="<?php echo $value['id'] ?>"><?php echo $value['nama'] ?></option>
             <?php endforeach; ?>
           </select>
-          <button type="submit" name="simpan" id="simpan" class="btn btn-outline-primary" style="margin-top:10px;" >Simpan</button>
+          <button type="submit" name="simpan" id="simpan" class="btn btn-primary" style="margin-top:10px;" >Simpan</button>
         </form>
       </div>
     </div>

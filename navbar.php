@@ -74,9 +74,9 @@ if (!isset($_SESSION['tipe'])) {
                                             <li>
                                                 <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                                             </li>
-                                            <li>
+                                            <!--<li>
                                                 <a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>
-                                            </li>
+                                            </li>-->
                                             <li>
                                                 <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
                                             </li>
@@ -193,8 +193,8 @@ if (!isset($_SESSION['tipe'])) {
                                     </li>
                                     <li class="droplink"><a href="#"><span class="menu-icon icon-grid"></span><p>Data Kerjasama</p><span class="arrow"></span></a>
                                         <ul class="sub-menu">
-                                          <li><a href="data-pemohon.php">Kerjasama Dalam Negeri</a></li>
-                                          <li><a href="data-mitra.php">Kerjasama Luar Negeri</a></li>
+                                          <li><a href="data-kerjasama-dalam-negeri.php">Kerjasama Dalam Negeri</a></li>
+                                          <li><a href="data-kerjasama-luar-negeri.php">Kerjasama Luar Negeri</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="data-kegiatan.php"><span class="menu-icon icon-layers"></span><p>Data Kegiatan</p></a></li>

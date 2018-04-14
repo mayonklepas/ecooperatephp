@@ -30,14 +30,31 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
   });
 </script>
 
-<div class="container-fluid" style="margin-top:20px;">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-tittle"> Data Status Kegiatan </h5>
-      <form class="" action="" method="GET">
-        <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
-      </form>
-      <a href="data-status-kegiatanop.php?id_kegiatan=<?php echo $id ?>" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+<div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="data-kegiatan.php">Data Kegiatan</a></li>
+            <li class="active">Data Status Kegiatan</li>
+        </ol>
+    </div>
+    <div class="page-title">
+        <div class="container">
+            <h3>Data Status Kegiatan</h3>
+        </div>
+    </div>
+    <div id="main-wrapper" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-heading clearfix">
+                        <h4 class="panel-title">Data Status Kegiatan</h4>
+                    </div>
+                    <div class="panel-body">
+                          <form class="" action="" method="POST">
+                            <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
+                          </form>
+      <a href="data-status-kegiatanop.php?id_kegiatan=<?php echo $id ?>" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
               <th>Tanggal</th>
@@ -49,8 +66,8 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
                 <td><?php echo date("d F Y",strtotime($value['tanggal'])) ?></td>
                 <td><?php echo $value['nama'] ?></td>
                 <td>
-                  <a href="data-status-kegiatanop.php?id=<?php echo $value['id'] ?>&id_kegiatan=<?php echo $id ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
+                  <a href="data-status-kegiatanop.php?id=<?php echo $value['id'] ?>&id_kegiatan=<?php echo $id ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                 </td>
               </tr>
               <?php endforeach; ?>

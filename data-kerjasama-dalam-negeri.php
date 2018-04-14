@@ -57,7 +57,6 @@ if (isset($_GET['page'])) {
 }
 
 
-
 $jumlahpage=ceil($jumlahdata / $limit);
 
 ?>
@@ -110,7 +109,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
                           <form class="" action="" method="POST">
                             <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
                           </form>
-      <a href="data-kerjasama-dalam-negeriop.php" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+      <a href="data-kerjasama-dalam-negeriop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
@@ -140,17 +139,17 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 <td><?php echo date("d F Y",strtotime($value['masa_berakhir'])) ?></td>
                 <td>
                   <?php if ($value['dokumen']=="" || $value['dokumen']=="na"): ?>
-                    <a href="uploadfilekerjasama.php?id=<?php echo $value['id'] ?>&kat=dalam" class="btn btn-outline-primary">Upload</a>
+                    <a href="uploadfilekerjasama.php?id=<?php echo $value['id'] ?>&kat=dalam" class="btn btn-primary">Upload</a>
                   <?php else: ?>
-                    <a href="uploadfilekerjasama.php?id=<?php echo $value['id'] ?>&kat=dalam" class="btn btn-outline-primary">Upload</a>
-                    <a href="file/<?php echo $value['dokumen'] ?>" class="btn btn-outline-success">Download</a>
+                    <a href="uploadfilekerjasama.php?id=<?php echo $value['id'] ?>&kat=dalam" class="btn btn-primary">Upload</a>
+                    <a href="file/<?php echo $value['dokumen'] ?>" class="btn btn-success">Download</a>
                   <?php endif; ?>
                 </td>
                 <td><?php echo $value['keterangan'] ?></td>
                 <td>
-                  <a href="data-kerjasama-dalam-negeriop.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
-                  <a href="data-status-dn.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-warning">Cek Status</a>
+                  <a href="data-kerjasama-dalam-negeriop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
+                  <a href="data-status-dn.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Cek Status</a>
                 </td>
               </tr>
           <?php endforeach; ?>

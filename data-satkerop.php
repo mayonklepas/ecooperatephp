@@ -67,12 +67,13 @@ if(isset($_POST['simpan'])){
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li><a href="data-satker.php">Data Satker</a></li>
+            <li class="active">Input Data Satker</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Input Data Satker</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -80,7 +81,7 @@ if(isset($_POST['simpan'])){
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Input Data Satker</h4>
                     </div>
                     <div class="panel-body">
       <br>
@@ -107,7 +108,7 @@ if(isset($_POST['simpan'])){
           <input type="password" name="password" id="password" value="<?php echo $spassword;?>" class="form-control">
           <label for="" id="lrepas" >Retype Password</label>
           <input type="password" name="repassword" id="repassword" value="" class="form-control">
-          <button type="submit" name="simpan" id="simpan" class="btn btn-outline-primary" style="margin-top:10px;" disabled=true >Simpan</button>
+          <button type="submit" name="simpan" id="simpan" class="btn btn-primary" style="margin-top:10px;" disabled=true >Simpan</button>
         </form>
       </div>
     </div>

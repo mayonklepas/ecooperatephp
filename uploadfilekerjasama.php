@@ -66,7 +66,8 @@ if(isset($_POST['simpan'])){
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li><a href="data-kerjasama-dalam-negeri.php">Data Kerjasama Dalam Negeri</a></li>
+            <li class="active">Upload File Kerjasama</li>
         </ol>
     </div>
     <div class="page-title">
@@ -79,7 +80,7 @@ if(isset($_POST['simpan'])){
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Upload File Kerjasama</h4>
                     </div>
                     <div class="panel-body">
                       <?php echo $notif ?>

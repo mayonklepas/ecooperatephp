@@ -112,14 +112,29 @@ $jumlahpage=ceil($jumlahdata / $limit);
   });
 </script>
 
-<div class="container-fluid" style="margin-top:20px;">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-tittle"> Data Kegiatan</h5>
-      <form class="" action="" method="GET">
-        <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
-      </form>
-      <a href="data-kegiatanop.php" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+<div class="page-inner">
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb container">
+            <li><a href="index.php">Home</a></li>
+        </ol>
+    </div>
+    <div class="page-title">
+        <div class="container">
+            <h3>Daftar Data Kegiatan</h3>
+        </div>
+    </div>
+    <div id="main-wrapper" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-heading clearfix">
+                        <h4 class="panel-title">Daftar Data Kegiatan</h4>
+                    </div>
+                    <div class="panel-body">
+                          <form class="" action="" method="POST">
+                            <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
+                          </form>
+      <a href="data-kegiatanop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
@@ -141,26 +156,25 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 <td><?php echo $value['durasi'] ?></td>
                 <td><?php echo $value['negara'] ?></td>
                 <td><?php echo $value['kota'] ?></td>
-                <td>  <div class="btn-group" role="group">
-                  <button id="btgdokumen" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dokumen
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="btgdokumen">
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=undangan" class="dropdown-item">Undangan</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=deputi" class="dropdown-item">Deputi</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=persetujuan" class="dropdown-item">Persetujuan</a>
-                      <a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=foto" class="dropdown-item">Foto</a>
-                  </div>
-                </div>
+                <td>
+                  <li class="dropdown" style="list-style-type: none;">
+                    <button type="button" name="button" class=" btn dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">Dokumen</button>
+                      <ul class="dropdown-menu dropdown-list" role="menu">
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=undangan" class="dropdown-item">Undangan</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=deputi" class="dropdown-item">Deputi</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=persetujuan" class="dropdown-item">Persetujuan</a></li>
+                          <li role="presentation"><a href="uploadfile.php?id=<?php echo $value['id'] ?>&kat=foto" class="dropdown-item">Foto</a></li>
+                      </ul>
+                  </li>
                 </td>
                 <td><?php echo $value['status_akhir'] ?></td>
                 <td>
-                  <a href="data-kegiatanop.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
+                  <a href="data-kegiatanop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                   <?php if ($value['status']==1): ?>
-                    <a href="data-status-kegiatan.php?id=<?php echo $value['id'] ?>" class="btn btn-outline-info">Cek Status</a>
+                    <a href="data-status-kegiatan.php?id=<?php echo $value['id'] ?>" class="btn btn-info">Cek Status</a>
                   <?php else: ?>
-                    <button type="button" class="btn btn-outline-default" data-id="<?php echo $value['id'] ?>" data-field="status">Pending</button>
+                    <button type="button" class="btn btn-default" data-id="<?php echo $value['id'] ?>" data-field="status">Pending</button>
                   <?php endif; ?>
 
                 </td>

@@ -99,12 +99,12 @@ $jumlahpage=ceil($jumlahdata / $limit);
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li class="active">Data Pemohon</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Data Pemohon</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -112,10 +112,13 @@ $jumlahpage=ceil($jumlahdata / $limit);
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Data Pemohon</h4>
                     </div>
                     <div class="panel-body">
-      <a href="data-pemohonop.php" class="btn btn-outline-primary" style="margin-top:10px;">Tambah</a>
+                      <form class="" action="" method="POST">
+                        <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
+                      </form>
+      <a href="data-pemohonop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
@@ -140,8 +143,8 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 <td><?php echo $value['password'] ?></td>
                 <td><?php echo $value['tipe'] ?></td>
                 <td>
-                  <a href="data-pemohonop.php?nik=<?php echo $value['nik'] ?>" class="btn btn-outline-warning">Edit</a>
-                  <button type="button" name="hapus" class="btn btn-outline-danger hapus" data-id="<?php echo $value['nik'] ?>" data-file="">Hapus</button>
+                  <a href="data-pemohonop.php?nik=<?php echo $value['nik'] ?>" class="btn btn-warning">Edit</a>
+                  <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['nik'] ?>" data-file="">Hapus</button>
                 </td>
               </tr>
               <?php endforeach; ?>

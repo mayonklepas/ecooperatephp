@@ -52,12 +52,13 @@ if(isset($_POST['simpan'])){
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Kegiatan</li>
+            <li><a href="data-data_master_status.php">Data Master Status</a></li>
+            <li class="active">Input Data Master Status</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Kegiatan</h3>
+            <h3>Input Data Master Status</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -65,7 +66,7 @@ if(isset($_POST['simpan'])){
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Kegiatan</h4>
+                        <h4 class="panel-title">Input Data Master Status</h4>
                     </div>
                     <div class="panel-body">
       <br>
@@ -78,7 +79,7 @@ if(isset($_POST['simpan'])){
             <option value="Kegiatan">Kegiatan</option>
             <option value="Kerjasama">Kerjasama</option>
           </select>
-          <button type="submit" name="simpan" id="simpan" class="btn btn-outline-primary" style="margin-top:10px;" >Simpan</button>
+          <button type="submit" name="simpan" id="simpan" class="btn btn-primary" style="margin-top:10px;" >Simpan</button>
         </form>
       </div>
     </div>
