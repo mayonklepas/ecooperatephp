@@ -4,10 +4,14 @@ include_once 'navbar.php';
 $h=new Helper();
 $sid=$_GET['id'];
 $kat=$_GET['kat'];
-$snama_kegiatan="";
+$stanggal="";
+$snip="";
 $snama="";
-$snik="";
-$snegara="";
+$snopasport="";
+$snama_kegiatan="";
+$sdurasi="";
+$sid_negara="";
+$snama_negara="";
 $skota="";
 $fieldkat="";
 $headerkat="";
@@ -27,13 +31,21 @@ if($kat=="undangan"){
 }
 if(isset($_GET['id'])){
   $id=$_GET['id'];
-  $datafile=$h->read("SELECT id, data_kegiatan.nik,data_pemohon.nama, nama_kegiatan, durasi, negara, kota,".$fieldkat." FROM data_kegiatan INNER JOIN data_pemohon ON data_kegiatan.nik=data_pemohon.nik",array($id));
+  $datafile=$h->read("  SELECT data_permohonan.id, tanggal,data_permohonan.nip,data_pegawai.nama_pegawai,no_passport,
+    nama_kegiatan,durasi,id_negara,data_negara.nama AS nama_negara,kota,".$fieldkat." FROM data_permohonan
+    INNER JOIN data_pegawai ON data_permohonan.nip=data_pegawai.nip
+    INNER JOIN data_negara ON data_permohonan.id_negara=data_negara.id WHERE data_permohonan.id=?",array($id));
   foreach ($datafile as $value) {
-    $snama_kegiatan=$value['nama_kegiatan'];
-    $snik=$value['nik'];
     $sid=$value['id'];
-    $snama=$value['nama'];
-    $snegara=$value['negara'];
+    $stanggal=$value['tanggal'];
+    $snip=$value['nip'];
+    $snama=$value['nama_pegawai'];
+    $snopasport=$value['no_passport'];
+    $snama_kegiatan=$value['nama_kegiatan'];
+    $sdurasi=$value['durasi'];
+    $sid_negara=$value['id_negara'];
+    $sid_negara=$value['id_negara'];
+    $snama_negara=$value['nama_negara'];
     $skota=$value['kota'];
     $namafiledidb=$value[$fieldkat];
   }
@@ -46,7 +58,7 @@ if(isset($_POST['simpan'])){
   $size=filesize($tmp_file);
   $rawext=explode(".",$namafile);
   $ext=end($rawext);
-  $namabarufile=$sid."-".$snik."-".$snama."-".$snama_kegiatan."-".$kat."-".date("dmyhis").".".$ext;
+  $namabarufile=$sid."-".$snip."-".$snama."-".$snama_kegiatan."-".$kat."-".date("dmyhis").".".$ext;
   if($size <= 3000000){
     if($namafiledidb=="" || $namafiledidb=="na" || $namafiledidb=="none"){
 
@@ -56,9 +68,9 @@ if(isset($_POST['simpan'])){
 
     try {
       move_uploaded_file($tmp_file,"file/".$namabarufile);
-        $h->exec("UPDATE data_kegiatan SET ".$fieldkat."=? WHERE id=? ",array($namabarufile,$id));
+        $h->exec("UPDATE data_permohonan SET ".$fieldkat."=? WHERE id=? ",array($namabarufile,$id));
         $notif="<div class='alert alert-success'><b>Data Berhasil Disimpan</b>
-         <a href='data-kegiatan.php' style='color:red;'> <i class='pe-7s-back'></i> Kembali ke Data </a></div>";
+         <a href='data-permohonan.php' style='color:red;'> <i class='pe-7s-back'></i> Kembali ke Data </a></div>";
     } catch (Exception $e) {
       echo $e->getMessage();
     }
@@ -90,7 +102,7 @@ if(isset($_POST['simpan'])){
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-          <li><a href="data-status-kegiatan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
+          <li><a href="data-permohonan.php?" class="active">Data Kegiatan</a></li>
           <li class="active"> Upload File Kegiatan</li>
         </ol>
     </div>
@@ -110,7 +122,9 @@ if(isset($_POST['simpan'])){
                       <?php echo $notif ?>
                       <div class="alert alert-warning">
                         Nama File : <?php echo $namafiledidb ?>
-                        <?php if ($namafiledidb != "" || $namafiledidb !="na" ): ?>
+                        <?php if ($namafiledidb == "" || $namafiledidb =="na" || $namafiledidb =="NULL" ): ?>
+
+                        <?php else :?>
                            <a href="file/<?php echo $namafiledidb ?>" class="">Download</a>
                         <?php endif; ?>
                       </div>

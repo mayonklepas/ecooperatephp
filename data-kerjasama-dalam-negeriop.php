@@ -15,11 +15,12 @@ $smasa_berlaku="";
 $smasa_berakhir="";
 $spic="";
 $sjabatan_pic="";
+$sidsatker="";
 $ssatker="";
 $sdokumen="";
 $sketerangan="";
 if(isset($_GET['id'])){
-$data=$h->read("SELECT data_kerjasama_dn.id,data_mitra.id as id_mitra,data_mitra.nama, bidang, judul, no_dokumen, jenis_perjanjian, ruang_lingkup, waktu_penanda_tangan, masa_berlaku, masa_berakhir, pic, jabatan_pic, satker, data_kerjasama_dn.keterangan FROM data_kerjasama_dn LEFT JOIN data_mitra ON data_kerjasama_dn.id_mitra=data_mitra.id WHERE data_kerjasama_dn.id=?",array($_GET['id']));
+$data=$h->read("SELECT data_kerjasama_dn.id,data_mitra.id as id_mitra,data_mitra.nama, bidang, judul, no_dokumen, jenis_perjanjian, ruang_lingkup, waktu_penanda_tangan, masa_berlaku, masa_berakhir, pic, jabatan_pic, satker,data_satker.nama AS nama_satker, data_kerjasama_dn.keterangan FROM data_kerjasama_dn INNER JOIN data_mitra ON data_kerjasama_dn.id_mitra=data_mitra.id  INNER JOIN data_satker ON data_kerjasama_dn.satker=data_satker.id WHERE data_kerjasama_dn.id=?",array($_GET['id']));
 foreach ($data as $value) {
   $sid=$value['id'];
   $smitra=$value['nama'];
@@ -34,7 +35,8 @@ foreach ($data as $value) {
   $smasa_berakhir=$value['masa_berakhir'];
   $spic=$value['pic'];
   $sjabatan_pic=$value['jabatan_pic'];
-  $ssatker=$value['satker'];
+  $sidsatker=$value['satker'];
+  $ssatker=$value['nama_satker'];
   $sketerangan=$value['keterangan'];
 }
 }
@@ -56,16 +58,17 @@ if(isset($_POST['simpan'])){
   if($sid == ""){
     $h->exec("INSERT INTO data_kerjasama_dn(id_mitra, bidang, judul, no_dokumen, jenis_perjanjian, ruang_lingkup, waktu_penanda_tangan, masa_berlaku, masa_berakhir, pic, jabatan_pic, satker, keterangan) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
     array($id_mitra, $bidang, $judul, $no_dokumen, $jenis_perjanjian, $ruang_lingkup, $waktu_penanda_tangan, $masa_berlaku, $masa_berakhir, $pic, $jabatan_pic, $satker, $keterangan));
-    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-kerjasama-dalam-negeriop.php');</script>";
+    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-kerjasama-dalam-negeri.php');</script>";
   }else{
     $h->exec("UPDATE data_kerjasama_dn SET id_mitra=?, bidang=?, judul=?, no_dokumen=?, jenis_perjanjian=?, ruang_lingkup=?, waktu_penanda_tangan=?, masa_berlaku=?, masa_berakhir=?, pic=?, jabatan_pic=?, satker=?, keterangan=? WHERE id=?",
     array($id_mitra, $bidang, $judul, $no_dokumen, $jenis_perjanjian, $ruang_lingkup, $waktu_penanda_tangan, $masa_berlaku, $masa_berakhir, $pic, $jabatan_pic, $satker,$keterangan,$sid));
-    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-kerjasama-dalam-negeriop.php');</script>";
+    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-kerjasama-dalam-negeri.php');</script>";
   }
 
 }
 
 $datamitra=$h->read("SELECT id,nama FROM data_mitra ORDER BY nama ASC",null);
+$datasatker=$h->read("SELECT id,nama FROM data_satker ORDER BY nama ASC",null);
 
 ?>
 <div class="page-inner">
@@ -83,7 +86,7 @@ $datamitra=$h->read("SELECT id,nama FROM data_mitra ORDER BY nama ASC",null);
     </div>
     <div id="main-wrapper" class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
                         <h4 class="panel-title">Input Data Kerjasama Dalam Negeris</h4>
@@ -119,7 +122,12 @@ $datamitra=$h->read("SELECT id,nama FROM data_mitra ORDER BY nama ASC",null);
           <label for="">Jabatan PIC</label>
           <input type="text" name="jabatan_pic" value="<?php echo $sjabatan_pic;?>" class="form-control">
           <label for="">Satker</label>
-          <input type="text" name="satker" value="<?php echo $ssatker;?>" class="form-control">
+          <select class="form-control" data-live-search="true" name="satker">
+            <option value="<?php echo $sidsatker ?>"><?php echo $ssatker ?></option>
+            <?php foreach ($datasatker as $value): ?>
+                <option value="<?php echo $value['id'] ?>" data-tokens="<?php echo $value['nama'] ?>"><?php echo $value['nama'] ?></option>
+            <?php endforeach; ?>
+          </select>
           <label for="">Keterangan</label>
           <input type="text" name="keterangan" value="<?php echo $sketerangan;?>" class="form-control">
           <button type="submit" name="simpan" class="btn btn-primary" style="margin-top:10px;">Simpan</button>

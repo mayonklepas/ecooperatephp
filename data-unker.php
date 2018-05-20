@@ -12,46 +12,44 @@ if (isset($_GET['page'])) {
   $posisi=$_GET['page'];
   if (isset($_GET['key'])) {
     $key="%".$_GET['key']."%";
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_satker WHERE
+    $qjumlahdata=$h->read("SELECT COUNT(data_unker.id) AS jumlah FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id WHERE
     nama LIKE ? OR
-    alamat LIKE ? OR
-    nohp LIKE ? ",array($key,$key,$key));
+    data_satker.nama LIKE ? ",array($key,$key));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, nama, alamat, nohp FROM data_satker WHERE
-    nama LIKE ? OR
-    alamat LIKE ? OR
-    nohp LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key));
+    $data=$h->read("SELECT data_unker.id, data_unker.nama, id_satker,data_satker.nama AS nama_satker FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id WHERE
+      nama LIKE ? OR
+      data_satker.nama LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_satker",null);
+    $qjumlahdata=$h->read("SELECT COUNT(data_unker.id) AS jumlah FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id",null);
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-      $data=$h->read("SELECT id, nama, alamat, nohp FROM data_satker LIMIT ".$limit." OFFSET ".$offset." " ,null);
+      $data=$h->read("SELECT data_unker.id, data_unker.nama, data_satker.id,data_satker.nama AS nama_satker FROM data_unker
+        INNER JOIN data_satker ON data_unker.id_satker=data_satker.id  LIMIT ".$limit." OFFSET ".$offset." " ,null);
   }
 }else{
   if (isset($_GET['key'])) {
     $key="%".$_GET['key']."%";
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_satker WHERE
+    $qjumlahdata=$h->read("SELECT COUNT(data_unker.id) AS jumlah FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id WHERE
     nama LIKE ? OR
-    alamat LIKE ? OR
-    nohp LIKE ? ",array($key,$key,$key));
+    data_satker.nama LIKE ? ",array($key,$key));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, nama, alamat, nohp FROM data_satker WHERE
-    nama LIKE ? OR
-    alamat LIKE ? OR
-    nohp LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key));
+    $data=$h->read("SELECT data_unker.id, data_unker.nama, id_satker,data_satker.nama AS nama_satker FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id WHERE
+      nama LIKE ? OR
+      data_satker.nama LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_satker",null);
+    $qjumlahdata=$h->read("SELECT COUNT(data_unker.id) AS jumlah FROM data_unker INNER JOIN data_satker ON data_unker.id_satker=data_satker.id",null);
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-      $data=$h->read("SELECT id, nama, alamat, nohp FROM data_satker LIMIT ".$limit." OFFSET ".$offset." " ,null);
+      $data=$h->read("SELECT data_unker.id, data_unker.nama, id_satker,data_satker.nama AS nama_satker FROM data_unker
+        INNER JOIN data_satker ON data_unker.id_satker=data_satker.id  LIMIT ".$limit." OFFSET ".$offset." " ,null);
   }
 }
 
@@ -65,7 +63,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
   $(document).ready(function(){
 
     $(document).on("click",".hapus",function(){
-      var table="data_satker";
+      var table="data_unker";
       var ref="id";
       var id=$(this).data("id");
       var file=$(this).data("file");
@@ -90,12 +88,12 @@ $jumlahpage=ceil($jumlahdata / $limit);
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Data Satker</li>
+            <li class="active">Data Unker</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Satker</h3>
+            <h3>Data Unker</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -103,30 +101,28 @@ $jumlahpage=ceil($jumlahdata / $limit);
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Satker</h4>
+                        <h4 class="panel-title">Data Unker</h4>
                     </div>
                     <div class="panel-body">
                           <form class="" action="" method="POST">
                             <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
                           </form>
-      <a href="data-satkerop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
+      <a href="data-unkerop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
               <th>ID</th>
               <th>Nama</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
+              <th>Satker</th>
               <th>Operasi</th>
             </tr>
               <?php foreach ($data as $value): ?>
                 <tr>
                 <td><?php echo $value['id'] ?></td>
                 <td><?php echo $value['nama'] ?></td>
-                <td><?php echo $value['alamat'] ?></td>
-                <td><?php echo $value['nohp'] ?></td>
+                <td><?php echo $value['nama_satker'] ?></td>
                 <td>
-                  <a href="data-satkerop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                  <a href="data-unkerop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
                   <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                 </td>
               </tr>
@@ -143,7 +139,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
                   $status="";
                 }
               ?>
-              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-satker.php?page=<?php echo $i ?>&key=<?php echo $_GET['key'] ?>"><?php echo $i+1; ?></a></li>
+              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-unker.php?page=<?php echo $i ?>&key=<?php echo $_GET['key'] ?>"><?php echo $i+1; ?></a></li>
             <?php else: ?>
               <?php
                 if ($posisi==$i) {
@@ -152,7 +148,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
                   $status="";
                 }
               ?>
-              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-satker.php?page=<?php echo $i ?>"><?php echo $i+1; ?></a></li>
+              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-unker.php?page=<?php echo $i ?>"><?php echo $i+1; ?></a></li>
             <?php endif; ?>
 
           <?php endfor; ?>

@@ -1,6 +1,6 @@
 <?php
 include 'navbar.php';
-require '../helper/helper.php';
+require 'helper/helper.php';
 $h=new Helper();
 $sid="";
 $stanggal="";
@@ -18,21 +18,20 @@ foreach ($data as $value) {
 }
 
 if(isset($_POST['simpan'])){
-  $tanggal=$_POST['tanggal'];
   $status=$_POST['status'];
   if($sid == ""){
-    $h->exec("INSERT INTO data_status(id_kegiatan, tanggal, id_status) VALUES (?,?,?)",
-    array($id_kegiatan,$tanggal,$status));
-    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-status-kegiatan.php?id=".$id_kegiatan."');</script>";
+    $h->exec("INSERT INTO data_status_permohonan(id_permohonan, id_status) VALUES (?,?)",
+    array($id_kegiatan,$status));
+    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-status-permohonan.php?id=".$id_kegiatan."');</script>";
   }else{
-    $h->exec("UPDATE data_status SET id_kegiatan=?, tanggal=?, id_status=? WHERE id=?",
-    array($id_kegiatan,$tanggal,$status,$sid ));
-    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-status-kegiatan.php?id=".$id_kegiatan."');</script>";
+    $h->exec("UPDATE data_status_permohonan SET id_permohonan=?, id_status=? WHERE id=?",
+    array($id_kegiatan,$status,$sid ));
+    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-status-permohonan.php?id=".$id_kegiatan."');</script>";
   }
 
 }
 
-$datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Kegiatan'",null);
+$datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='1'",null);
 ?>
 
 <script type="text/javascript">
@@ -52,11 +51,12 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
   });
 </script>
 
+
 <div class="page-inner">
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
           <li><a href="index.php">Home</a></li>
-          <li><a href="data-status-kegiatan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
+          <li><a href="data-status-permohonan.php?id=<?php echo $id_kegiatan?>" class="active">Data Status Kegiatan</a></li>
           <li class="active">Input Data Status Kegiatan</li>
         </ol>
     </div>
@@ -67,7 +67,7 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
     </div>
     <div id="main-wrapper" class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
                         <h4 class="panel-title">Input Data Status Kegiatan</h4>
@@ -75,8 +75,6 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
                     <div class="panel-body">
       <br>
         <form class="" action="" method="post">
-          <label for="">Tanggal</label>
-          <input type="date" name="tanggal" value="<?php echo $stanggal;?>" class="form-control" required=required autocomplete="off">
           <label for="">Status</label>
           <select class="form-control" name="status">
             <option value="<?php echo $sid_status ?>"><?php echo $sstatus ?></option>
@@ -91,5 +89,4 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Keg
       </div>
   </div>
 </div>
-</body>
-</html>
+<?php include 'footer.php'; ?>

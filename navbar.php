@@ -2,10 +2,6 @@
 session_start();
 if (!isset($_SESSION['tipe'])) {
   header('location:login.php');
-}else {
-  if($_SESSION['tipe']=="USER"){
-    header('location:usercontrol/index.php');
-  }
 }
 
 ?>
@@ -14,7 +10,7 @@ if (!isset($_SESSION['tipe'])) {
         <head>
 
                     <!-- Title -->
-                    <title>SISATYA</title>
+                    <title>ECOOPERATE</title>
                     <meta content="width=device-width, initial-scale=1" name="viewport"/>
                     <meta charset="UTF-8">
                     <meta name="description" content="Admin Dashboard Template" />
@@ -183,21 +179,40 @@ if (!isset($_SESSION['tipe'])) {
                                 <ul class="menu accordion-menu">
                                     <li class="nav-heading"><span>Navigation</span></li>
                                     <li><a href="index.php"><span class="menu-icon icon-speedometer"></span><p>Dashboard</p></a></li>
-                                    <li class="droplink"><a href="#"><span class="menu-icon icon-grid"></span><p>Master Data</p><span class="arrow"></span></a>
+                                    <?php if ($_SESSION['tipe']==1): ?>
+                                      <li class="droplink"><a href="#"><span class="menu-icon icon-grid"></span><p>Master Data</p><span class="arrow"></span></a>
+                                          <ul class="sub-menu">
+                                            <li><a href="data-user.php">Data User</a></li>
+                                            <li><a href="data-pegawai.php">Data Pegawai</a></li>
+                                            <li><a href="data-mitra.php">Data Mitra</a></li>
+                                            <li><a href="data-satker.php">Data Satker</a></li>
+                                            <li><a href="data-unker.php">Data Unker</a></li>
+                                            <li><a href="data-negara.php">Data Negara</a></li>
+                                            <li><a href="data-kategori-kerjasamaln.php">Data Kategori Kerjasama Luar Negeri</a></li>
+                                            <li><a href="data-master-status.php">Data Master Status</a></li>
+                                          </ul>
+                                      </li>
+                                    <?php endif; ?>
+                                    <?php if ($_SESSION['tipe']!=4): ?>
+                                      <li class="droplink"><a href="#"><span class="menu-icon icon-grid"></span><p>Data Kerjasama</p><span
+                                    <?php endif; ?>
+                                     class="arrow"></span></a>
                                         <ul class="sub-menu">
-                                          <li><a href="data-pemohon.php">Data Pemohon</a></li>
-                                          <li><a href="data-mitra.php">Data Mitra</a></li>
-                                          <li><a href="data-satker.php">Data Satker</a></li>
-                                          <li><a href="data-master-status.php">Data Master Status</a></li>
+                                          <?php if ($_SESSION['tipe']==1): ?>
+                                            <li><a href="data-kerjasama-luar-negeri.php">Kerjasama Luar Negeri</a></li>
+                                            <li><a href="data-kerjasama-dalam-negeri.php">Kerjasama Dalam Negeri</a></li>
+                                          <?php elseif ($_SESSION['tipe']==2) : ?>
+                                            <li><a href="data-kerjasama-dalam-negeri.php">Kerjasama Dalam Negeri</a></li>
+                                          <?php elseif ($_SESSION['tipe']==3) : ?>
+                                            <li><a href="data-kerjasama-luar-negeri.php">Kerjasama Luar Negeri</a></li>
+                                          <?php endif; ?>
+
                                         </ul>
                                     </li>
-                                    <li class="droplink"><a href="#"><span class="menu-icon icon-grid"></span><p>Data Kerjasama</p><span class="arrow"></span></a>
-                                        <ul class="sub-menu">
-                                          <li><a href="data-kerjasama-dalam-negeri.php">Kerjasama Dalam Negeri</a></li>
-                                          <li><a href="data-kerjasama-luar-negeri.php">Kerjasama Luar Negeri</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="data-kegiatan.php"><span class="menu-icon icon-layers"></span><p>Data Kegiatan</p></a></li>
+                                    <?php if ($_SESSION['tipe']==1 || $_SESSION['tipe']==4): ?>
+                                    <li><a href="data-permohonan.php"><span class="menu-icon icon-layers"></span><p>Data Permohonan</p></a></li>
+                                  <?php else: ?>
+                                    <?php endif; ?>
                                 </ul>
                             </div><!-- Page Sidebar Inner -->
                         </div><!-- Page Sidebar -->

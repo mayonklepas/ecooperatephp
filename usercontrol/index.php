@@ -12,50 +12,62 @@ if (isset($_GET['page'])) {
   $posisi=$_GET['page'];
   if (isset($_GET['key'])) {
     $key="%".$_GET['key']."%";
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_kegiatan WHERE
-    nama_kegiatan LIKE ? OR
+    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_permohonan WHERE nip=? AND
+    (nama_permohonan LIKE ? OR
     negara LIKE ? OR
-    kota LIKE ? AND data_kegiatan.nik=?",array($key,$key,$key,$_SESSION['nik']));
+    kota LIKE ?)",array($_SESSION['nip'],$key,$key,$key));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, data_kegiatan.nik,data_pemohon.nama, nama_kegiatan, durasi, negara, kota, surat_undangan, surat_deputi, surat_persetujuan, pas_foto,status,(SELECT nama FROM data_status INNER JOIN data_master_status ON data_status.id_status=data_master_status.id WHERE id_kegiatan=data_kegiatan.id ORDER BY data_master_status.id DESC LIMIT 1 ) AS status_akhir FROM data_kegiatan
-      INNER JOIN data_pemohon ON data_kegiatan.nik=data_pemohon.nik WHERE
-    nama_kegiatan LIKE ? OR
-    negara LIKE ? OR
-    kota LIKE ? AND data_kegiatan.nik=? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key,$_SESSION['nik']));
+    $data=$h->read("SELECT data_permohonan.id, tanggal,data_permohonan.nip,data_pegawai.nama_pegawai,no_passport,
+      nama_kegiatan,durasi,data_negara.nama AS nama_negara,kota,surat_undangan,surat_deputi,
+      surat_persetujuan,pas_foto,status,status_terima FROM data_permohonan
+      LEFT JOIN data_pegawai ON data_permohonan.nip=data_pegawai.nip
+      INNER JOIN data_negara ON data_permohonan.id_negara=data_negara.id WHERE data_pegawai.nip=? AND
+    (nama_kegiatan LIKE ? OR
+    data_negara.nama LIKE ? OR
+    kota LIKE ?) LIMIT ".$limit." OFFSET ".$offset." ",array($_SESSION['nip'],$key,$key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_kegiatan",null);
+    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_permohonan WHERE nip=?",array($_SESSION['nip']));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-      $data=$h->read("SELECT id, data_kegiatan.nik,data_pemohon.nama, nama_kegiatan, durasi, negara, kota, surat_undangan, surat_deputi, surat_persetujuan, pas_foto,status,(SELECT nama FROM data_status INNER JOIN data_master_status ON data_status.id_status=data_master_status.id WHERE id_kegiatan=data_kegiatan.id ORDER BY data_master_status.id DESC LIMIT 1 ) AS status_akhir FROM data_kegiatan
-        INNER JOIN data_pemohon ON data_kegiatan.nik=data_pemohon.nik WHERE data_kegiatan.nik=? LIMIT ".$limit." OFFSET ".$offset." " ,array($_SESSION['nik']));
+      $data=$h->read("SELECT data_permohonan.id, tanggal,data_permohonan.nip,data_pegawai.nama_pegawai,no_passport,
+        nama_kegiatan,durasi,data_negara.nama AS nama_negara,kota,surat_undangan,surat_deputi,
+        surat_persetujuan,pas_foto,status,status_terima FROM data_permohonan
+        LEFT JOIN data_pegawai ON data_permohonan.nip=data_pegawai.nip
+        INNER JOIN data_negara ON data_permohonan.id_negara=data_negara.id WHERE data_pegawai.nip=? LIMIT ".$limit." OFFSET ".$offset." " ,array($_SESSION['nip']));
   }
 }else{
   if (isset($_GET['key'])) {
     $key="%".$_GET['key']."%";
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_kegiatan WHERE
-    nama_kegiatan LIKE ? OR
+    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_permohonan WHERE nip=? AND
+    (nama_permohonan LIKE ? OR
     negara LIKE ? OR
-    kota LIKE ? AND data_kegiatan.nik=?",array($key,$key,$key,$_SESSION['nik']));
+    kota LIKE ?)",array($_SESSION['nip'],$key,$key,$key));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, data_kegiatan.nik,data_pemohon.nama, nama_kegiatan, durasi, negara, kota, surat_undangan, surat_deputi, surat_persetujuan, pas_foto,status,(SELECT nama FROM data_status INNER JOIN data_master_status ON data_status.id_status=data_master_status.id WHERE id_kegiatan=data_kegiatan.id ORDER BY data_master_status.id DESC LIMIT 1 ) AS status_akhir FROM data_kegiatan
-      INNER JOIN data_pemohon ON data_kegiatan.nik=data_pemohon.nik WHERE
-    nama_kegiatan LIKE ? OR
-    negara LIKE ? OR
-    kota LIKE ? AND data_kegiatan.nik=? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key,$_SESSION['nik']));
+    $data=$h->read("SELECT data_permohonan.id, tanggal,data_permohonan.nip,data_pegawai.nama_pegawai,no_passport,
+      nama_kegiatan,durasi,data_negara.nama AS nama_negara,kota,surat_undangan,surat_deputi,
+      surat_persetujuan,pas_foto,status,status_terima FROM data_permohonan
+      LEFT JOIN data_pegawai ON data_permohonan.nip=data_pegawai.nip
+      INNER JOIN data_negara ON data_permohonan.id_negara=data_negara.id WHERE WHERE data_pegawai.nip=? AND
+    (nama_kegiatan LIKE ? OR
+    data_negara.nama LIKE ? OR
+    kota LIKE ?) LIMIT ".$limit." OFFSET ".$offset." ",array($_SESSION['id'],$key,$key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
-    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_kegiatan",null);
+    $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_permohonan WHERE nip=?",array($_SESSION['nip']));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, data_kegiatan.nik,data_pemohon.nama, nama_kegiatan, durasi, negara, kota, surat_undangan, surat_deputi, surat_persetujuan, pas_foto,status,(SELECT nama FROM data_status INNER JOIN data_master_status ON data_status.id_status=data_master_status.id WHERE id_kegiatan=data_kegiatan.id ORDER BY data_master_status.id DESC LIMIT 1 ) AS status_akhir FROM data_kegiatan
-      INNER JOIN data_pemohon ON data_kegiatan.nik=data_pemohon.nik AND data_kegiatan.nik=? LIMIT ".$limit." OFFSET ".$offset." ",array($_SESSION['nik']));
+    $data=$h->read("SELECT data_permohonan.id, tanggal,data_permohonan.nip,data_pegawai.nama_pegawai,no_passport,
+      nama_kegiatan,durasi,data_negara.nama AS nama_negara,kota,surat_undangan,surat_deputi,
+      surat_persetujuan,pas_foto,status,status_terima FROM data_permohonan
+      LEFT JOIN data_pegawai ON data_permohonan.nip=data_pegawai.nip
+      INNER JOIN data_negara ON data_permohonan.id_negara=data_negara.id WHERE data_pegawai.nip=? LIMIT ".$limit." OFFSET ".$offset." ",array($_SESSION['nip']));
   }
 
 }
@@ -65,18 +77,19 @@ if (isset($_GET['page'])) {
 $jumlahpage=ceil($jumlahdata / $limit);
 
 ?>
+
 <script type="text/javascript">
   $(document).ready(function(){
 
     $(document).on("click",".hapus",function(){
-      var table="data_kegiatan";
+      var table="data_permohonan";
       var ref="id";
       var id=$(this).data("id");
       var file=$(this).data("file");
         var cf=confirm("Yakin ingin menghapus data ini ?");
         if(cf==true){
             $.ajax({
-              url:"operasi/hapus.php",
+              url:"../operasi/hapus.php",
               method:"POST",
               dataType:"HTML",
               data:{table:table,ref:ref,id:id,file:file},
@@ -89,7 +102,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
     });
 
     $(document).on("click",".aprove",function(){
-      var table="data_kegiatan";
+      var table="data_permohonan";
       var ref="id";
       var id=$(this).data("id");
       var field=$(this).data("field");
@@ -116,11 +129,12 @@ $jumlahpage=ceil($jumlahdata / $limit);
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
+            <li class="active">Data Permohonan</li>
         </ol>
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Daftar Data Kegiatan</h3>
+            <h3>Data Permohonan</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -128,33 +142,32 @@ $jumlahpage=ceil($jumlahdata / $limit);
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Daftar Data Kegiatan</h4>
+                        <h4 class="panel-title">Data Permohonan</h4>
                     </div>
                     <div class="panel-body">
-                          <form class="" action="" method="POST">
-                            <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
-                          </form>
-      <a href="data-kegiatanop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
+                      <form class="" action="" method="POST">
+                        <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
+                      </form>
+      <a href="data-permohonanop.php" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
       <?php echo $notif ?>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
-              <th>NIK</th>
+              <th>NIP</th>
               <th>Nama</th>
               <th>Kegiatan</th>
               <th>Durasi</th>
               <th>Negara</th>
               <th>Kota</th>
               <th>Dokumen</th>
-              <th>Status</th>
               <th>Operasi</th>
             </tr>
               <?php foreach ($data as $value): ?>
                 <tr>
-                <td><?php echo $value['nik'] ?></td>
-                <td><?php echo $value['nama'] ?></td>
+                <td><?php echo $value['nip'] ?></td>
+                <td><?php echo $value['nama_pegawai'] ?></td>
                 <td><?php echo $value['nama_kegiatan'] ?></td>
                 <td><?php echo $value['durasi'] ?></td>
-                <td><?php echo $value['negara'] ?></td>
+                <td><?php echo $value['nama_negara'] ?></td>
                 <td><?php echo $value['kota'] ?></td>
                 <td>
                   <li class="dropdown" style="list-style-type: none;">
@@ -167,14 +180,13 @@ $jumlahpage=ceil($jumlahdata / $limit);
                       </ul>
                   </li>
                 </td>
-                <td><?php echo $value['status_akhir'] ?></td>
                 <td>
-                  <a href="data-kegiatanop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
+                  <a href="data-permohonanop.php?id=<?php echo $value['id'] ?>" class="btn btn-warning">Edit</a>
                   <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
-                  <?php if ($value['status']==1): ?>
-                    <a href="data-status-kegiatan.php?id=<?php echo $value['id'] ?>" class="btn btn-info">Cek Status</a>
+                  <?php if ($value['status_terima']==1): ?>
+                    <a href="data-status-permohonan.php?id=<?php echo $value['id'] ?>" class="btn btn-info">Cek Status</a>
                   <?php else: ?>
-                    <button type="button" class="btn btn-default" data-id="<?php echo $value['id'] ?>" data-field="status">Pending</button>
+                    <button type="button" name="aprove" class="btn btn-default aproves">Pending</button>
                   <?php endif; ?>
 
                 </td>
@@ -192,7 +204,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
                   $status="";
                 }
               ?>
-              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-kegiatan.php?page=<?php echo $i ?>&key=<?php echo $_GET['key'] ?>"><?php echo $i+1; ?></a></li>
+              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-permohonan.php?page=<?php echo $i ?>&key=<?php echo $_GET['key'] ?>"><?php echo $i+1; ?></a></li>
             <?php else: ?>
               <?php
                 if ($posisi==$i) {
@@ -201,7 +213,7 @@ $jumlahpage=ceil($jumlahdata / $limit);
                   $status="";
                 }
               ?>
-              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-kegiatan.php?page=<?php echo $i ?>"><?php echo $i+1; ?></a></li>
+              <li class="page-item <?php echo $status ?>"><a class="page-link" href="data-permohonan.php?page=<?php echo $i ?>"><?php echo $i+1; ?></a></li>
             <?php endif; ?>
 
           <?php endfor; ?>
@@ -210,5 +222,4 @@ $jumlahpage=ceil($jumlahdata / $limit);
     </div>
   </div>
 </div>
-</body>
-</html>
+<?php include 'footer.php'; ?>

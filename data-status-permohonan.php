@@ -1,15 +1,15 @@
 <?php
 include 'navbar.php';
-require '../helper/helper.php';
+require 'helper/helper.php';
 $h=new Helper();
 $id=$_GET['id'];
-$data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_status LEFT JOIN data_master_status ON data_status.id_status=data_master_status.id WHERE id_kegiatan=?",array($id));
+$data=$h->read("SELECT data_status_permohonan.id,tanggal,data_master_status.nama FROM data_status_permohonan LEFT JOIN data_master_status ON data_status_permohonan.id_status=data_master_status.id WHERE id_permohonan=? ORDER BY tanggal DESC",array($id));
 ?>
 <script type="text/javascript">
   $(document).ready(function(){
 
     $(document).on("click",".hapus",function(){
-      var table="data_status";
+      var table="data_status_permohonan";
       var ref="id";
       var id=$(this).data("id");
       var file=$(this).data("file");
@@ -34,7 +34,7 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
     <div class="page-breadcrumb">
         <ol class="breadcrumb container">
             <li><a href="index.php">Home</a></li>
-            <li><a href="data-kegiatan.php">Data Kegiatan</a></li>
+            <li><a href="data-permohonan.php">Data Permohonan</a></li>
             <li class="active">Data Status Kegiatan</li>
         </ol>
     </div>
@@ -54,7 +54,7 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
                           <form class="" action="" method="POST">
                             <input type="text" name="key" value="" class="form-control" placeholder="Cari Data (Ketik dan Enter)">
                           </form>
-      <a href="data-status-kegiatanop.php?id_kegiatan=<?php echo $id ?>" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
+      <a href="data-status-permohonanop.php?id_kegiatan=<?php echo $id ?>" class="btn btn-primary" style="margin-top:10px;">Tambah</a>
           <table class="table table-bordered" style="margin-top:10px">
             <tr>
               <th>Tanggal</th>
@@ -66,7 +66,7 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
                 <td><?php echo date("d F Y",strtotime($value['tanggal'])) ?></td>
                 <td><?php echo $value['nama'] ?></td>
                 <td>
-                  <a href="data-status-kegiatanop.php?id=<?php echo $value['id'] ?>&id_kegiatan=<?php echo $id ?>" class="btn btn-warning">Edit</a>
+                  <a href="data-status-permohonanop.php?id=<?php echo $value['id'] ?>&id_kegiatan=<?php echo $id ?>" class="btn btn-warning">Edit</a>
                   <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
                 </td>
               </tr>
@@ -75,5 +75,4 @@ $data=$h->read("SELECT data_status.id,tanggal,data_master_status.nama FROM data_
     </div>
   </div>
 </div>
-</body>
-</html>
+<?php include 'footer.php'; ?>

@@ -3,38 +3,31 @@ include 'navbar.php';
 require 'helper/helper.php';
 $h=new Helper();
 $sid="";
+$sid_kerjasama=$_GET['id_kerjasama'];
 $stanggal="";
-$sid_status="";
-$sstatus="";
-$sketerangan="";
-$id_kerjasama=$_GET['id_kerjasama'];
+$snama_status="";
 if(isset($_GET['id'])){
 $sid=$_GET['id'];
-$data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM data_status_dn WHERE id=?",array($_GET['id']));
+$data=$h->read("SELECT tanggal,nama_status FROM data_status_kerjasama_dn WHERE id=?",array($_GET['id']));
 foreach ($data as $value) {
   $stanggal=$value['tanggal'];
-  $sstatus=$value['nama'];
-  $sid_status=$value['id_status'];
-  $sketerangan=$_POST['keterangan'];
+  $snama_status=$value['nama_status'];
 }
 }
 
 if(isset($_POST['simpan'])){
-  $tanggal=$_POST['tanggal'];
-  $status=$_POST['status'];
-  $keterangan=$_POST['keterangan'];
+  $nama_status=$_POST['nama_status'];
   if($sid == ""){
-    $h->exec("INSERT INTO data_status_dn(id_kerjasama, tanggal, id_status,keterangan) VALUES (?,?,?,?)",
-    array($id_kerjasama,$tanggal,$status,$keterangan));
-    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-status-dn.php?id=".$id_kerjasama."');</script>";
+    $h->exec("INSERT INTO data_status_kerjasama_dn(id_kerjasama, nama_status) VALUES (?,?)",
+    array($sid_kerjasama,$nama_status));
+    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-status-dn.php?id=".$sid_kerjasama."');</script>";
   }else{
-    $h->exec("UPDATE data_status_dn SET id_kerjasama=?, tanggal=?, status=?,keterangan=? WHERE id=?",
-    array($id_kerjasama,$tanggal,$status,$keterangan,$sid ));
-    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-status-dn.php?id=".$id_kerjasama."');</script>";
+    $h->exec("UPDATE data_status_kerjasama_dn SET nama_status=? WHERE id=?",
+    array($nama_status,$sid ));
+    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-status-dn.php?id=".$sid_kerjasama."');</script>";
   }
 
 }
-$datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Kerjasama'",null);
 ?>
 
 <script type="text/javascript">
@@ -69,7 +62,7 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Ker
     </div>
     <div id="main-wrapper" class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
                         <h4 class="panel-title">Input Data Status Dalam Negeri</h4>
@@ -77,17 +70,8 @@ $datastatus=$h->read("SELECT id,nama FROM data_master_status WHERE kategori='Ker
                     <div class="panel-body">
       <br>
         <form class="" action="" method="post">
-          <label for="">Tanggal</label>
-          <input type="date" name="tanggal" value="<?php echo $stanggal;?>" class="form-control" required=required autocomplete="off">
           <label for="">Status</label>
-          <select class="form-control" name="status">
-            <option value="<?php echo $sstatus ?>"><?php echo $sstatus ?></option>
-            <?php foreach ($datastatus as $value): ?>
-              <option value="<?php echo $value['id'] ?>"><?php echo $value['nama'] ?></option>
-            <?php endforeach; ?>
-          </select>
-          <label for="">Keterangan</label>
-          <input type="text" name="keterangan" value="<?php echo $sketerangan;?>" class="form-control" required=required autocomplete="off">
+          <input type="text" name="nama_status" value="<?php echo $snama_status;?>" class="form-control" required=required autocomplete="off">
           <button type="submit" name="simpan" id="simpan" class="btn btn-outline-primary" style="margin-top:10px;" >Simpan</button>
         </form>
       </div>

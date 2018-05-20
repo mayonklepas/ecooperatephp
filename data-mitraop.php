@@ -6,7 +6,7 @@ $sid="";
 $snama="";
 $sketerangan="";
 if(isset($_GET['id'])){
-$data=$h->read("SELECT nama, keterangan FROM data_mitra WHERE nik=?",array($_GET['nik']));
+$data=$h->read("SELECT nama, keterangan FROM data_mitra WHERE id=?",array($_GET['id']));
 foreach ($data as $value) {
   $snama=$value['nama'];
   $sketerangan=$value['keterangan'];
@@ -19,11 +19,11 @@ if(isset($_POST['simpan'])){
   if($sid == ""){
     $h->exec("INSERT INTO data_mitra(nama,keterangan) VALUES (?,?)",
     array($nama,$keterangan));
-    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-mitraop.php');</script>";
+    echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-mitra.php');</script>";
   }else{
     $h->exec("UPDATE data_mitra SET nama=?, keterangan=? WHERE id=?",
     array($nama,$keterangan));
-    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-mitraop.php');</script>";
+    echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-mitra.php');</script>";
   }
 
 }
@@ -61,7 +61,7 @@ if(isset($_POST['simpan'])){
     </div>
     <div id="main-wrapper" class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
                         <h4 class="panel-title">Data Kegiatan</h4>

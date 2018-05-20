@@ -19,9 +19,9 @@ if (isset($_GET['page'])) {
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, judul, bidang, kategori, negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,keterangan,check_keterangan FROM data_kerjasama_ln WHERE
+    $data=$h->read("SELECT data_kerjasama_ln.id, judul, bidang, data_kategori_kerjasama_ln.nama AS nama_kategori, data_negara.nama AS nama_negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,data_kerjasama_ln.keterangan,check_keterangan FROM data_kerjasama_ln INNER JOIN data_kategori_kerjasama_ln ON data_kerjasama_ln.kategori=data_kategori_kerjasama_ln.id INNER JOIN data_negara ON data_kerjasama_ln.negara=data_negara.id WHERE
       judul LIKE ? OR
-      kategori LIKE ? OR
+      data_kategori_kerjasama_ln.nama LIKE ? OR
       keterangan LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
@@ -29,21 +29,21 @@ if (isset($_GET['page'])) {
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-      $data=$h->read("SELECT id, judul, bidang, kategori, negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,keterangan,check_keterangan FROM data_kerjasama_ln LIMIT ".$limit." OFFSET ".$offset." " ,null);
+      $data=$h->read("SELECT data_kerjasama_ln.id, judul, bidang,data_kategori_kerjasama_ln.nama AS nama_kategori, data_negara.nama AS nama_negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,data_kerjasama_ln.keterangan,check_keterangan FROM data_kerjasama_ln INNER JOIN data_kategori_kerjasama_ln ON data_kerjasama_ln.kategori=data_kategori_kerjasama_ln.id INNER JOIN data_negara ON data_kerjasama_ln.negara=data_negara.id LIMIT ".$limit." OFFSET ".$offset." " ,null);
   }
 }else{
   if (isset($_GET['key'])) {
     $key="%".$_GET['key']."%";
     $qjumlahdata=$h->read("SELECT COUNT(id) AS jumlah FROM data_kerjasama_ln WHERE
     judul LIKE ? OR
-    kategori LIKE ? OR
+    data_kategori_kerjasama_ln.nama LIKE ? OR
     keterangan LIKE ?",array($key,$key,$key));
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, judul, bidang, kategori, negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,keterangan,check_keterangan FROM data_kerjasama_ln WHERE
+    $data=$h->read("SELECT data_kerjasama_ln.id, judul, bidang,data_kategori_kerjasama_ln.nama AS nama_kategori, data_negara.nama AS nama_negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,data_kerjasama_ln.keterangan,check_keterangan FROM data_kerjasama_ln INNER JOIN data_kategori_kerjasama_ln ON data_kerjasama_ln.kategori=data_kategori_kerjasama_ln.id INNER JOIN data_negara ON data_kerjasama_ln.negara=data_negara.id WHERE
       judul LIKE ? OR
-      kategori LIKE ? OR
+      data_kategori_kerjasama_ln.nama LIKE ? OR
       keterangan LIKE ? LIMIT ".$limit." OFFSET ".$offset." ",array($key,$key,$key));
     $notif="<div class='alert alert-success' style='margin-top:10px;'><h5>Hasil Pencarian : ".$_GET['key']."</h5></div>";
   }else{
@@ -51,7 +51,7 @@ if (isset($_GET['page'])) {
     foreach ($qjumlahdata as $value) {
       $jumlahdata=$value['jumlah'];
     }
-    $data=$h->read("SELECT id, judul, bidang, kategori, negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,keterangan,check_keterangan FROM data_kerjasama_ln LIMIT ".$limit." OFFSET ".$offset." ",null);
+    $data=$h->read("SELECT data_kerjasama_ln.id, judul, bidang, data_kategori_kerjasama_ln.nama AS nama_kategori, data_negara.nama AS nama_negara,tanggal_ttd_mulai,tanggal_ttd_akhir, pic,data_kerjasama_ln.keterangan,check_keterangan FROM data_kerjasama_ln INNER JOIN data_kategori_kerjasama_ln ON data_kerjasama_ln.kategori=data_kategori_kerjasama_ln.id INNER JOIN data_negara ON data_kerjasama_ln.negara=data_negara.id LIMIT ".$limit." OFFSET ".$offset." ",null);
   }
 
 }
@@ -130,8 +130,8 @@ $jumlahpage=ceil($jumlahdata / $limit);
                 <tr>
                 <td><?php echo $value['judul'] ?></td>
                 <td><?php echo $value['bidang'] ?></td>
-                <td><?php echo $value['kategori'] ?></td>
-                <td><?php echo $value['negara'] ?></td>
+                <td><?php echo $value['nama_kategori'] ?></td>
+                <td><?php echo $value['nama_negara'] ?></td>
                 <td><?php echo date("d F Y",strtotime($value['tanggal_ttd_mulai'])) ?></td>
                 <td><?php echo date("d F Y",strtotime($value['tanggal_ttd_akhir'])) ?></td>
                 <td><?php echo $value['pic'] ?></td>

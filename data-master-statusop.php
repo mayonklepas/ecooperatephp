@@ -16,15 +16,14 @@ foreach ($data as $value) {
 }
 
 if(isset($_POST['simpan'])){
-  $kategori=$_POST['kategori'];
   $nama=$_POST['nama'];
   if($sid == ""){
-    $h->exec("INSERT INTO data_master_status(kategori, nama) VALUES (?,?)",
+    $h->exec("INSERT INTO data_master_status(nama) VALUES (?)",
     array($kategori,$nama));
     echo "<script>alert('Data Berhasil Diinput'); window.location.replace('data-master-statusop.php');</script>";
   }else{
-    $h->exec("UPDATE data_master_status SET kategori=?, nama=? WHERE id=?",
-    array($kategori,$nama,$sid));
+    $h->exec("UPDATE data_master_status SET nama=? WHERE id=?",
+    array($nama,$sid));
     echo "<script>alert('Data Berhasil Diupdate'); window.location.replace('data-master-statusop.php');</script>";
   }
 
@@ -63,7 +62,7 @@ if(isset($_POST['simpan'])){
     </div>
     <div id="main-wrapper" class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
                         <h4 class="panel-title">Input Data Master Status</h4>
@@ -73,12 +72,6 @@ if(isset($_POST['simpan'])){
         <form class="" action="" method="post">
           <label for="">Nama Status</label>
           <input type="text" name="nama" value="<?php echo $snama;?>" class="form-control" >
-          <label for="">Tipe</label>
-          <select class="form-control" name="kategori">
-            <option value="<?php echo $skategori ?>"><?php echo $skategori ?></option>
-            <option value="Kegiatan">Kegiatan</option>
-            <option value="Kerjasama">Kerjasama</option>
-          </select>
           <button type="submit" name="simpan" id="simpan" class="btn btn-primary" style="margin-top:10px;" >Simpan</button>
         </form>
       </div>

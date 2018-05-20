@@ -1,39 +1,25 @@
 <?php
-require_once 'helper/helper.php';
+require_once '../helper/helper.php';
 $h=new Helper();
 $notif="";
 if(isset($_POST['login'])){
-  $nik="";
+  $nip="";
   $nama="";
   $jabatan="";
-  $email="";
-  $telepon="";
-  $tipe="";
   $jumlah=0;
   $username=$_POST['nip'];
   $password=$_POST['password'];
-  $datalogin=$h->read("SELECT COUNT(nik) AS jumlah, nama, jabatan, email, telepon, password, nik, nip, tipe FROM data_user WHERE nip=? AND password=? LIMIT 1",array($username,$password));
+  $datalogin=$h->read("SELECT COUNT(nip) AS jumlah, nip, nama_pegawai, jabatan FROM data_pegawai WHERE nip=? AND nip=? LIMIT 1",array($username,$password));
   foreach ($datalogin as  $value) {
-    $nama=$value['nama'];
+    $nama=$value['nama_pegawai'];
     $jabatan=$value['jabatan'];
-    $email=$value['email'];
-    $telepon=$value['telepon'];
-    $password=$value['password'];
-    $nip=$value['nip'];
-    $nik=$value['nik'];
-    $tipe=$value['tipe'];
     $jumlah=$value['jumlah'];
   }
   if($jumlah==1){
     session_start();
     $_SESSION['nama']=$nama;
     $_SESSION['jabatan']=$jabatan;
-    $_SESSION['email']=$email;
-    $_SESSION['telepon']=$telepon;
-    $_SESSION['password']=$password;
-    $_SESSION['nip']=$nip;
-    $_SESSION['nik']=$nik;
-    $_SESSION['tipe']=$tipe;
+    $_SESSION['nip']=$username;
     header("location:index.php");
   }else{
     $notif="<div class='alert alert-danger'>User atau password salah</div>";

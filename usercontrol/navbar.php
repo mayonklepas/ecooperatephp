@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['tipe'])) {
-  header('location:../login.php');
+if (!isset($_SESSION['nip'])) {
+  header('location:login.php');
 }
 
 ?>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['tipe'])) {
         <head>
 
                     <!-- Title -->
-                    <title>SISATYA</title>
+                    <title>ECOOPERATE</title>
                     <meta content="width=device-width, initial-scale=1" name="viewport"/>
                     <meta charset="UTF-8">
                     <meta name="description" content="Admin Dashboard Template" />
@@ -43,6 +43,8 @@ if (!isset($_SESSION['tipe'])) {
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
 
+
+
                     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
                     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <!--[if lt IE 9]>
@@ -62,7 +64,7 @@ if (!isset($_SESSION['tipe'])) {
                                     </a>
                                 </div>
                                 <div class="logo-box">
-                                    <a href="index.php" class="logo-text"><span>SISATYA</span></a>
+                                    <a href="index.php" class="logo-text"><span>ECOOPERATE</span></a>
                                 </div><!-- Logo Box -->
                                 <div class="topmenu-outer">
                                     <div class="top-menu">
@@ -118,55 +120,14 @@ if (!isset($_SESSION['tipe'])) {
                                             </li>
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
-                                          <!--<li class="dropdown">
-                                              <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge badge-success pull-right"><?php //echo $jumlahdatapesan ?></span></a>
-                                              <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
-                                                  <li><p class="drop-title"><?php //echo $jumlahdatapesan ?> Pesan Baru !</p></li>
-                                                  <li class="dropdown-menu-list slimscroll messages">
-                                                      <ul class="list-unstyled">
-                                                          <li>
-                                                            <?php //foreach ($datapesan as $value): ?>
-                                                              <a href="data-saran-detail.php?id=<?php //echo $value['id']; ?>">
-                                                                  <div class="msg-img"><div class="online on"></div><img class="img-circle" src="assets/images/ava.png" alt=""></div>
-                                                                  <p class="msg-name"><?php //echo $value['nama_satuan_kerja'] ?></p>
-                                                                  <p class="msg-text"><?php //echo $value['judul'] ?></p>
-                                                                  <p class="msg-time"><?php //echo date("d/m/y",strtotime($value['tanggal'])) ?></p>
-                                                              </a>
-                                                            <?php //endforeach; ?>
-                                                          </li>
-                                                      </ul>
-                                                  </li>
-                                                  <li class="drop-all"><a href="data-saran.php" class="text-center">Semua Pesan</a></li>
-                                              </ul>
-                                          </li>
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right"><?php //echo $jumlahdata ?></span></a>
-                                                <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
-                                                    <li><p class="drop-title">Usulan Masuk</p></li>
-                                                    <li class="dropdown-menu-list slimscroll tasks">
-                                                        <ul class="list-unstyled">
-                                                            <li>
-                                                              <?php //foreach ($datausulan as $value): ?>
-                                                                <a href="#">
-                                                                    <div class="task-icon badge badge-info"><i class="icon-flag"></i></div>
-                                                                    <span class="badge badge-roundless badge-default pull-right"><?php //echo date("d/m/y",strtotime($value['tanggal'])) ?></span>
-                                                                    <p class="task-details"><?php //echo $value['nama_alat'] ?></p>
-                                                                </a>
-                                                              <?php //endforeach; ?>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="drop-all"><a href="data-usulan.php" class="text-center">Semua Info</a></li>
-                                                </ul>
-                                            </li>-->
                                             <li class="dropdown">
                                                 <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                                                     <span class="user-name"><?php echo $_SESSION['nama'] ?><i class="fa fa-angle-down"></i></span>
-                                                    <img class="img-circle avatar" src="assets/images/ava.png" width="40" height="40" alt="">
+                                                    <img class="img-circle avatar" src="../assets/images/ava.png" width="40" height="40" alt="">
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-list" role="menu">
                                                     <!--<li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>-->
-                                                    <li role="presentation"><a href="logout.php"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                                                    <li role="presentation"><a href="../logout.php"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                                                 </ul>
                                             </li>
                                         </ul><!-- Nav -->

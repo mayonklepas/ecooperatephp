@@ -3,14 +3,14 @@ include 'navbar.php';
 require 'helper/helper.php';
 $h=new Helper();
 $id=$_GET['id'];
-$data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM data_status_dn LEFT JOIN data_master_status ON data_status_dn.id_status=data_master_status.id WHERE id_kerjasama=?",array($id));
+$data=$h->read("SELECT id,tanggal,nama_status FROM data_status_kerjasama_dn WHERE id_kerjasama=?",array($id));
 ?>
 <script type="text/javascript">
   $(document).ready(function(){
 
     $(document).on("click",".hapus",function(){
-      var table="data_status_dn";
-      var ref="nik";
+      var table="data_status_kerjasama_dn";
+      var ref="id";
       var id=$(this).data("id");
       var file=$(this).data("file");
         var cf=confirm("Yakin ingin menghapus data ini ?");
@@ -40,7 +40,7 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
     </div>
     <div class="page-title">
         <div class="container">
-            <h3>Data Status Dalam Negeri</h3>
+            <h3>Data Status Kerjasama Dalam Negeri</h3>
         </div>
     </div>
     <div id="main-wrapper" class="container">
@@ -48,7 +48,7 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">Data Status Dalam Negeri</h4>
+                        <h4 class="panel-title">Data Status Kerjasama Dalam Negeri</h4>
                     </div>
                     <div class="panel-body">
                           <form class="" action="" method="POST">
@@ -59,14 +59,12 @@ $data=$h->read("SELECT tanggal,id_status,data_master_status.nama,keterangan FROM
             <tr>
               <th>Tanggal</th>
               <th>Status</th>
-              <th>Keterangan</th>
               <th>Operasi</th>
             </tr>
               <?php foreach ($data as $value): ?>
                 <tr>
                 <td><?php echo date("d F Y",strtotime($value['tanggal'])) ?></td>
-                <td><?php echo $value['nama'] ?></td>
-                  <td><?php echo $value['keterangan'] ?></td>
+                <td><?php echo $value['nama_status'] ?></td>
                 <td>
                   <a href="data-status-dnop.php?id=<?php echo $value['id'] ?>&id_kerjasama=<?php echo $id ?>" class="btn btn-warning">Edit</a>
                   <button type="button" name="hapus" class="btn btn-danger hapus" data-id="<?php echo $value['id'] ?>" data-file="">Hapus</button>
